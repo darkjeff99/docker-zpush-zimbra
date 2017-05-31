@@ -8,12 +8,9 @@ ENV TERM xterm
 
 ENV ZPUSH_URL zpush_default
 
-# Install utilis
-RUN apt-get update && apt-get install -y wget
-
 # Install zpush
 RUN cd /var/www/html && \
-	wget -O - "http://download.z-push.org/final/${VERSION}/z-push-${VERSIONFULL}.tar.gz" | tar --strip-components=1 -x -z 
+	curl -L "http://download.z-push.org/final/${VERSION}/z-push-${VERSIONFULL}.tar.gz" | tar --strip-components=1 -x -z 
 
 # Add zimbra backend
 RUN cd /var/www/html/backend  && \
@@ -31,9 +28,6 @@ RUN chown www-data:www-data -R /var/lib/z-push /var/log/z-push /var/www/html
 
 # Add vhost for zpush
 COPY default-vhost.conf /etc/apache2/sites-enabled/000-default.conf
-
-# Cleaning
-RUN apt-get clean 
 
 # Expose Apache
 EXPOSE 80
