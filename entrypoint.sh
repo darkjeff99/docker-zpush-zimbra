@@ -28,7 +28,7 @@ fi
 if [ -z  $ZPUSH_URL_IN_HTTP ]; then
     ZPUSH_URL_PROTO="http:\/\/"
 else
-     ZPUSH_URL_PROT0="https:\/\/"
+     ZPUSH_URL_PROTO="https:\/\/"
 fi 
 
 if [ -z  $ZIMBRA_URL_IN_HTTP ]; then
