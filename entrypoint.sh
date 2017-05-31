@@ -26,15 +26,15 @@ EOF
 fi
 
 if [ -z  $ZPUSH_URL_IN_HTTP ]; then
-    ZPUSH_URL_PROTO="http:\/\/"
+    ZPUSH_URL_PROTO="https:\/\/"
 else
-     ZPUSH_URL_PROTO="https:\/\/"
+     ZPUSH_URL_PROTO="http:\/\/"
 fi 
 
 if [ -z  $ZIMBRA_URL_IN_HTTP ]; then
-    ZIMBRA_URL_PROTO="http:\/\/"
+    ZIMBRA_URL_PROTO="https:\/\/"
 else
-     ZIMBRA_URL_PROTO="https:\/\/"
+     ZIMBRA_URL_PROTO="http:\/\/"
 fi 
 
 # Config Zimbra backend
