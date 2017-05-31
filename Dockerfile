@@ -3,6 +3,7 @@ MAINTAINER Serge Ohl <docker@vizuweb.fr>
 
 ENV VERSION 2.3
 ENV VERSIONFULL 2.3.6
+ENV BACKENDVERSION 66
 ENV TERM xterm
 
 ENV ZPUSH_URL zpush_default
@@ -12,12 +13,17 @@ RUN apt-get update && apt-get install -y wget
 
 # Install zpush
 RUN cd /var/www/html && \
-	wget -O - "http://download.z-push.org/final/${VERSION}/z-push-${VERSIONFULL}.tar.gz" | tar --strip-components=1 -x -z && ls -lah
+	wget -O - "http://download.z-push.org/final/${VERSION}/z-push-${VERSIONFULL}.tar.gz" | tar --strip-components=1 -x -z 
 
 # Add zimbra backend
-RUN cd /tmp && \
-	wget -O - "http://downloads.sourceforge.net/project/zimbrabackend/Release62/zimbra62.tgz?use_mirror=freefr" | tar --strip-components=1 -x -z && \
-	mv /tmp/z-push-2 /var/www/html/backend/zimbra
+RUN cd /var/www/html/backend  && \
+	curl -o zpzb-install.sh -L "https://sourceforge.net/projects/zimbrabackend/files/Release${BACKENDVERSION}/zpzb-install.sh/download"  && \
+	curl -o zimbra${BACKENDVERSION}.tgz  -L "http://downloads.sourceforge.net/project/zimbrabackend/Release${BACKENDVERSION}/zimbra${BACKENDVERSION}.tgz" 
+	
+RUN cd /var/www/html/backend &&\
+	chmod +x zpzb-install.sh &&\
+	sed -i "/chcon[^']*$/d" zpzb-install.sh &&\
+	/bin/bash ./zpzb-install.sh $BACKENDVERSION ; exit 0
 
 # Create directory for zpush
 RUN mkdir -p /var/log/z-push && mkdir /var/lib/z-push

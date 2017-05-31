@@ -16,11 +16,12 @@ if [ ! -f  "${ZPUSH_CONFIG}.bkp" ]; then
     define('ZIMBRA_SYNC_CONTACT_PICTURES', true);
     define('ZIMBRA_VIRTUAL_CONTACTS',true);
     define('ZIMBRA_VIRTUAL_APPOINTMENTS',true);
+    define('ZIMBRA_VIRTUAL_NOTES',true);
     define('ZIMBRA_VIRTUAL_TASKS',true);
     define('ZIMBRA_IGNORE_EMAILED_CONTACTS',true);
     define('ZIMBRA_HTML',true);
     define('ZIMBRA_ENFORCE_VALID_EMAIL',false);
-    define('ZIMBRA_SMART_FOLDERS',true);
+    define('ZIMBRA_SMART_FOLDERS',false);
 EOF
 fi
 
